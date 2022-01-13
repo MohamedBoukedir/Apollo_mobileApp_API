@@ -7,14 +7,11 @@ const projectSchema = new Schema({
     },
     description :{
         type:String
-    }
-    ,
-    tasks : {
-        type :Array, // array of task
     },
-    users :{
-        type :Array,
-    }
+    userid :{
+        type :String,
+    },
+    tasks :Array,
 },{timestamps :true})
 
 var Projectdb=mongoose.model('project',projectSchema);
