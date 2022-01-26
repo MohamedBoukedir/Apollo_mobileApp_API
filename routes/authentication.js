@@ -29,26 +29,9 @@ router.post("/login", async (req, res) => {
       );
       // save user token
       user.token = token;
-      // user
-      // user projects
-      const userProjects = [];
-      const tasks = await taskdb.find({});
-      const projectes = await projectdb.find({});
-      projectes.forEach((project) => {
-        if (project.userid == user.email) {
-          tasks.forEach((task) => {
-            if (task.project_id == project._id) {
-              project.tasks.push(task);
-            }
-          });
-          userProjects.push(project);
-        }
-      });
       return res.status(200).json({
         user: user._id,
         name: user.name,
-        password: user.password,
-        projects: userProjects,
         email: user.email,
         token: user.token,
       });
@@ -64,6 +47,7 @@ router.post("/register", async (req, res) => {
   try {
     // Get user input
     const { name, password, email } = req.body;
+    console.log(password, email);
     // Validate user input
     if (!(email && password && name)) {
       res.status(400).send("All input is required");
